@@ -1,9 +1,9 @@
-R Tools to Work With [www.dataseries.org](www.dataseries.org)
-=============================================================
+R tools to [dataseries.org](www.dataseries.org)
+===============================================
 
 A very preliminary test version to import data series from
-[www.dataseries.org](www.dataseries.org) into R. It currently only only contains
-one function, `ds`, that imports series as `xts` objects.
+[www.dataseries.org](www.dataseries.org) into R. It currently only contains
+one function `ds` to download series as `xts` objects.
 
 To install:
 
