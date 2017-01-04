@@ -1,0 +1,13 @@
+Package: dataseries
+Type: Package
+Title: R Tools to Work With <http://www.dataseries.org>
+Version: 0.0.1
+Date: 2017-01-03
+Author: Christoph Sax
+Maintainer: Christoph Sax <christoph.sax@gmail.com>
+Description: R Tools to Work With <http://www.dataseries.org>
+Depends: 
+  xts
+License: GPL-3
+RoxygenNote: 5.0.1
+
