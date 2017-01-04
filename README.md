@@ -1,5 +1,5 @@
-R tools to [dataseries.org](www.dataseries.org)
-===============================================
+R tools for [dataseries.org](www.dataseries.org)
+================================================
 
 A very preliminary test version to import data series from
 [www.dataseries.org](www.dataseries.org) into R. It currently only contains
