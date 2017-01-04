@@ -1,6 +1,6 @@
 # download
 
-# sid <- c("CCI.AIK", "CCI.ASSS")
+# sid <- c("CCI.AIK", "CCI.ASSS", "CNS.TTL")
 
 #' @export
 ds <- function(sid){
@@ -20,7 +20,7 @@ ds <- function(sid){
     fname.not.cached <- paste0(base.url, sid[!is.cached], ".csv")
     z[!is.cached] <- lapply(fname.not.cached, function(e) try(read.csv(e, row.names = NULL, colClasses = c("Date", "numeric")))) 
   }
-  z[is.cached] <- as.list(.in.memory.cache)[sid]
+  z[is.cached] <- as.list(.in.memory.cache)[sid[is.cached]]
 
   is.err <- vapply(z, function(e) inherits(e, "try-error"), FALSE)
   if (length(z[is.err]) > 0){
@@ -41,6 +41,6 @@ ds <- function(sid){
   ans
 }
 
-ds(c("CCI.AIK", "CCI.ASSS"))
+# ds(c("CCI.AIK", "CCI.ASSS"))
 
 
