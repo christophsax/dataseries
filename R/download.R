@@ -4,7 +4,7 @@
 
 #' @export
 ds <- function(sid){
-  base.url <- "http://data.dataseries.org.s3-website.eu-central-1.amazonaws.com/"
+  base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
   
   ## in memory cache
   if (!exists(".in.memory.cache")){
@@ -36,7 +36,7 @@ ds <- function(sid){
 
   if (length(z[!is.err]) == 0) return(NULL)
 
-  z.xts <- lapply(z[!is.err], function(e) as.xts(e$value, order.by = e$time))
+  z.xts <- lapply(z[!is.err], function(e) xts::as.xts(e$value, order.by = e$time))
   ans <- do.call(cbind, z.xts)
   ans
 }

@@ -1,7 +1,7 @@
 Package: dataseries
 Type: Package
 Title: R Tools to Work With <http://www.dataseries.org>
-Version: 0.0.1
+Version: 0.0.2
 Date: 2017-01-03
 Author: Christoph Sax
 Maintainer: Christoph Sax <christoph.sax@gmail.com>
