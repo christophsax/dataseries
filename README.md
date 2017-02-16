@@ -1,9 +1,11 @@
-R tools for [dataseries.org](http://www.dataseries.org)
-===========================================================
+dataseries: Switzerland's Data Series in One Place
+==================================================
 
-A very preliminary test version to import data series from
-[dataseries.org](http://www.dataseries.org) into R. It currently only contains
-one function `ds` to download series as `xts` objects.
+Tools to download and import time series from
+[www.dataseries.org](http://www.dataseries.org).
+
+The packages contains a single function, `ds`, which downloads series from
+[www.dataseries.org](http://www.dataseries.org) as a `data.frame` or `xts`.
 
 To install:
 
@@ -13,4 +15,5 @@ To install:
 Usage:
 
     dataseries::ds(c("CCI.AIK", "CCI.ASSS"))
+    dataseries::ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
 
