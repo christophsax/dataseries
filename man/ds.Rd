@@ -18,7 +18,7 @@ cache_rm()
 \href{http://www.dataseries.org}{www.dataseries.org}.}
 
 \item{class}{class of the return value, either a \code{"data.frame"} (default) or
-an \code{"xts"} object.}
+an \code{"xts"} object (requires the \code{xts} package to be installed).}
 }
 \description{
 \code{ds} downloads time series from

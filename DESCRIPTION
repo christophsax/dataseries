@@ -5,11 +5,11 @@ Version: 0.0.3
 Date: 2017-02-17
 Author: Christoph Sax
 Maintainer: Christoph Sax <christoph.sax@gmail.com>
-Description: Tools to download and import time series from 
-  <http://www.dataseries.org>, a comprehensive and updated database of open data 
-  for Switzerland.
+Description: Download and import time series from <http://www.dataseries.org>, a comprehensive and up-to-date database of open data from Switzerland.
 Suggests: 
   xts
 License: GPL-3
+URL: http://www.dataseries.org
+BugReports: https://github.com/christophsax/dataseries
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.0

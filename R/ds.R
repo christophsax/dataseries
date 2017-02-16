@@ -8,7 +8,7 @@ base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 #' 
 #' `ds` downloads time series from
 #' [www.dataseries.org](http://www.dataseries.org), as a `data.frame` or and 
-#' `xts` object.
+#' `xts` object. 
 #' 
 #' Downloaded series are **cached in memory** as long as your
 #' R session is open. If you want to force an update, either restart the R
@@ -18,7 +18,7 @@ base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 #' @param id  one ore more IDs, as given by
 #'   [www.dataseries.org](http://www.dataseries.org). 
 #' @param class  class of the return value, either a `"data.frame"` (default) or 
-#'   an `"xts"` object.
+#'   an `"xts"` object (requires the `xts` package to be installed).
 #' @examples
 #' \dontrun{
 #' ds(c("CCI.AIK", "CCI.ASSS"))
@@ -99,8 +99,8 @@ combine_df <- function(ll){
 # transform to xts and cbind
 combine_xts <- function(ll){
 
-  if (!requireNamespace('xts')) {
-    stop("'xts' package is not installed but required to return series as 'xts' objects.", call. = FALSE)
+  if (!requireNamespace('xts', quietly = TRUE)) {
+    stop("The 'xts' package is not installed. To install, run:\n  install.packages(\"xts\")", call. = FALSE)
   }
 
   ll.xts <- lapply(ll, function(e) xts::as.xts(e$value, order.by = e$time))
