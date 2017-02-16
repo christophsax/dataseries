@@ -5,7 +5,9 @@ Version: 0.0.3
 Date: 2017-02-17
 Author: Christoph Sax
 Maintainer: Christoph Sax <christoph.sax@gmail.com>
-Description: Tools to download and import time series from <http://www.dataseries.org>.
+Description: Tools to download and import time series from 
+  <http://www.dataseries.org>, a comprehensive and updated database of open data 
+  for Switzerland.
 Suggests: 
   xts
 License: GPL-3

@@ -1,3 +1,5 @@
+utils::globalVariables(".in.memory.cache")
+
 #' Download time series from
 #' [www.dataseries.org](http://www.dataseries.org)
 #' 
@@ -14,7 +16,7 @@
 #' @param class  class of the return value, either a `"data.frame"` (default) or 
 #'   an `"xts"` object.
 #' @examples
-#' /dontrun{
+#' \dontrun{
 #' ds(c("CCI.AIK", "CCI.ASSS"))
 #' ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
 #'
@@ -23,6 +25,7 @@
 #' }
 #' 
 #' @export
+#' @importFrom utils read.csv
 ds <- function(id, class = c("data.frame", "xts")){
 
   class <- match.arg(class)
@@ -31,8 +34,9 @@ ds <- function(id, class = c("data.frame", "xts")){
   base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
   
   ## in memory cache
-  if (!exists(".in.memory.cache")){
-    .in.memory.cache <<- new.env(parent = emptyenv())
+  if (!exists(".in.memory.cache", envir = globalenv())){
+    assign(".in.memory.cache", new.env(parent = emptyenv()), envir = globalenv())
+    # .in.memory.cache <<- new.env(parent = emptyenv())
   }
 
   # output structure

@@ -25,7 +25,7 @@ R session is open. If you want to force an update, either restart your R
 session or delete the caching enivronment, \code{.in.memory.cache} (see examples).
 }
 \examples{
-/dontrun{
+\dontrun{
 ds(c("CCI.AIK", "CCI.ASSS"))
 ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
 
