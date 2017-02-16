@@ -1,17 +1,21 @@
-utils::globalVariables(".in.memory.cache")
+# Environment to cache downloaded series
+env.cache <- new.env(parent = emptyenv())
+
+base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 
 #' Download time series from
 #' [www.dataseries.org](http://www.dataseries.org)
 #' 
-#' Download time series from
-#' [www.dataseries.org](http://www.dataseries.org) as a `data.frame` or and 
+#' `ds` downloads time series from
+#' [www.dataseries.org](http://www.dataseries.org), as a `data.frame` or and 
 #' `xts` object.
 #' 
-#' Downloaded series are **cached in the memory** and kept there as long as your
-#' R session is open. If you want to force an update, either restart your R
-#' session or delete the caching enivronment, `.in.memory.cache` (see examples).
+#' Downloaded series are **cached in memory** as long as your
+#' R session is open. If you want to force an update, either restart the R
+#' session or use `cache_rm` to emtpy the cache. `cache_ls` is a utility
+#' function that lists all cached objects (see examples).
 #'
-#' @param id  one ore more IDs, as shown on
+#' @param id  one ore more IDs, as given by
 #'   [www.dataseries.org](http://www.dataseries.org). 
 #' @param class  class of the return value, either a `"data.frame"` (default) or 
 #'   an `"xts"` object.
@@ -20,8 +24,11 @@ utils::globalVariables(".in.memory.cache")
 #' ds(c("CCI.AIK", "CCI.ASSS"))
 #' ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
 #'
-#' # delete in-memory cache, to force a fresh download
-#' rm(".in.memory.cache")
+#' # list cached objects
+#' cache_ls()
+#' 
+#' # empty in-memory cache, which forces a fresh download
+#' cache_rm()
 #' }
 #' 
 #' @export
@@ -30,25 +37,17 @@ ds <- function(id, class = c("data.frame", "xts")){
 
   class <- match.arg(class)
   stopifnot(inherits(id, "character"))
-
-  base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
   
-  ## in memory cache
-  if (!exists(".in.memory.cache", envir = globalenv())){
-    assign(".in.memory.cache", new.env(parent = emptyenv()), envir = globalenv())
-    # .in.memory.cache <<- new.env(parent = emptyenv())
-  }
-
   # output structure
   z <- as.list(id)
   names(z) <- id
 
-  is.cached <- id %in% names(.in.memory.cache)
+  is.cached <- id %in% names(env.cache)
   if (!all(is.cached)){
     fname.not.cached <- paste0(base.url, id[!is.cached], ".csv")
     z[!is.cached] <- lapply(fname.not.cached, function(e) try(read.csv(e, row.names = NULL, colClasses = c("Date", "numeric")))) 
   }
-  z[is.cached] <- as.list(.in.memory.cache)[id[is.cached]]
+  z[is.cached] <- as.list(env.cache)[id[is.cached]]
 
   is.err <- vapply(z, function(e) inherits(e, "try-error"), FALSE)
   if (length(z[is.err]) > 0){
@@ -58,7 +57,7 @@ ds <- function(id, class = c("data.frame", "xts")){
 
   to.chache <- z[!is.err & !is.cached]
 
-  assign_to_cache <- function(x, value) assign(x, value, envir = .in.memory.cache)
+  assign_to_cache <- function(x, value) assign(x, value, envir = env.cache)
   Map(assign_to_cache, x = names(to.chache), value = to.chache)
 
   zz <- z[!is.err]
@@ -75,6 +74,20 @@ ds <- function(id, class = c("data.frame", "xts")){
 }
 
 
+#' @rdname ds
+#' @export
+cache_ls <- function(){
+  ls(envir = env.cache)
+}
+
+#' @rdname ds
+#' @export
+cache_rm <- function(){
+  rm(list = cache_ls(), envir = env.cache)
+}
+
+
+
 # combine single time series data frames in a single data.frame, using merge.
 combine_df <- function(ll){
   # rename 'value' column to id
@@ -86,7 +99,7 @@ combine_df <- function(ll){
 # transform to xts and cbind
 combine_xts <- function(ll){
 
-  if (requireNamespace('xts')) {
+  if (!requireNamespace('xts')) {
     stop("'xts' package is not installed but required to return series as 'xts' objects.", call. = FALSE)
   }
 

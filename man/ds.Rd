@@ -2,35 +2,45 @@
 % Please edit documentation in R/ds.R
 \name{ds}
 \alias{ds}
+\alias{cache_ls}
+\alias{cache_rm}
 \title{Download time series from
 \href{http://www.dataseries.org}{www.dataseries.org}}
 \usage{
 ds(id, class = c("data.frame", "xts"))
+
+cache_ls()
+
+cache_rm()
 }
 \arguments{
-\item{id}{one ore more IDs, as shown on
+\item{id}{one ore more IDs, as given by
 \href{http://www.dataseries.org}{www.dataseries.org}.}
 
 \item{class}{class of the return value, either a \code{"data.frame"} (default) or
 an \code{"xts"} object.}
 }
 \description{
-Download time series from
-\href{http://www.dataseries.org}{www.dataseries.org} as a \code{data.frame} or and
+\code{ds} downloads time series from
+\href{http://www.dataseries.org}{www.dataseries.org}, as a \code{data.frame} or and
 \code{xts} object.
 }
 \details{
-Downloaded series are \strong{cached in the memory} and kept there as long as your
-R session is open. If you want to force an update, either restart your R
-session or delete the caching enivronment, \code{.in.memory.cache} (see examples).
+Downloaded series are \strong{cached in memory} as long as your
+R session is open. If you want to force an update, either restart the R
+session or use \code{cache_rm} to emtpy the cache. \code{cache_ls} is a utility
+function that lists all cached objects (see examples).
 }
 \examples{
 \dontrun{
 ds(c("CCI.AIK", "CCI.ASSS"))
 ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
 
-# delete in-memory cache, to force a fresh download
-rm(".in.memory.cache")
+# list cached objects
+cache_ls()
+
+# empty in-memory cache, which forces a fresh download
+cache_rm()
 }
 
 }
