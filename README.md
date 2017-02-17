@@ -9,8 +9,7 @@ The packages contains a single function, `ds`, which downloads series from
 
 To install:
 
-    if (!require("devtools")) install.packages("devtools")
-    devtools::install_github("christophsax/dataseries")
+    install.packages("dataseries")
 
 Usage:
 
