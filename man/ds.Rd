@@ -4,8 +4,7 @@
 \alias{ds}
 \alias{cache_ls}
 \alias{cache_rm}
-\title{Download time series from
-\href{http://www.dataseries.org}{www.dataseries.org}}
+\title{Download Time Series from \href{http://www.dataseries.org}{www.dataseries.org}}
 \usage{
 ds(id, class = c("data.frame", "xts"))
 
@@ -22,13 +21,13 @@ an \code{"xts"} object (requires the \code{xts} package to be installed).}
 }
 \description{
 \code{ds} downloads time series from
-\href{http://www.dataseries.org}{www.dataseries.org}, as a \code{data.frame} or and
-\code{xts} object.
+\href{http://www.dataseries.org}{www.dataseries.org}. Data can be imported as a
+\code{data.frame} or an \code{xts} object.
 }
 \details{
-Downloaded series are \strong{cached in memory} as long as your
+Downloaded series are \strong{cached in memory} as long as the
 R session is open. If you want to force an update, either restart the R
-session or use \code{cache_rm} to emtpy the cache. \code{cache_ls} is a utility
+session or run \code{cache_rm} to emtpy the cache. \code{cache_ls} is a utility
 function that lists all cached objects (see examples).
 }
 \examples{

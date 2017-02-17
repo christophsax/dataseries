@@ -3,16 +3,15 @@ env.cache <- new.env(parent = emptyenv())
 
 base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 
-#' Download time series from
-#' [www.dataseries.org](http://www.dataseries.org)
+#' Download Time Series from [www.dataseries.org](http://www.dataseries.org)
 #' 
 #' `ds` downloads time series from
-#' [www.dataseries.org](http://www.dataseries.org), as a `data.frame` or and 
-#' `xts` object. 
+#' [www.dataseries.org](http://www.dataseries.org). Data can be imported as a 
+#' `data.frame` or an `xts` object. 
 #' 
-#' Downloaded series are **cached in memory** as long as your
+#' Downloaded series are **cached in memory** as long as the
 #' R session is open. If you want to force an update, either restart the R
-#' session or use `cache_rm` to emtpy the cache. `cache_ls` is a utility
+#' session or run `cache_rm` to emtpy the cache. `cache_ls` is a utility
 #' function that lists all cached objects (see examples).
 #'
 #' @param id  one ore more IDs, as given by
