@@ -6,7 +6,7 @@
 \alias{cache_rm}
 \title{Download Time Series from \href{http://www.dataseries.org}{www.dataseries.org}}
 \usage{
-ds(id, class = c("data.frame", "xts"))
+ds(id, class = c("data.frame", "ts", "xts"))
 
 cache_ls()
 
@@ -32,8 +32,9 @@ function that lists all cached objects (see examples).
 }
 \examples{
 \dontrun{
-ds(c("CCI.AIK", "CCI.ASSS"))
-ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
+ds(c("CCI.AIK", "CCI.ASSS"))               # data.frame
+ds(c("CCI.AIK", "CCI.ASSS"), "ts")         # "ts" object
+ds(c("CCI.AIK", "CCI.ASSS"), "xts")        # "xts" object
 
 # list cached objects
 cache_ls()

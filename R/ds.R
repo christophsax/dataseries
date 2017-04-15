@@ -20,8 +20,9 @@ base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 #'   an `"xts"` object (requires the `xts` package to be installed).
 #' @examples
 #' \dontrun{
-#' ds(c("CCI.AIK", "CCI.ASSS"))
-#' ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
+#' ds(c("CCI.AIK", "CCI.ASSS"))               # data.frame
+#' ds(c("CCI.AIK", "CCI.ASSS"), "ts")         # "ts" object
+#' ds(c("CCI.AIK", "CCI.ASSS"), "xts")        # "xts" object
 #'
 #' # list cached objects
 #' cache_ls()
@@ -32,7 +33,7 @@ base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
 #' 
 #' @export
 #' @importFrom utils read.csv
-ds <- function(id, class = c("data.frame", "xts")){
+ds <- function(id, class = c("data.frame", "ts", "xts")){
 
   class <- match.arg(class)
   stopifnot(inherits(id, "character"))
@@ -64,6 +65,8 @@ ds <- function(id, class = c("data.frame", "xts")){
 
   combine <- if (class == "data.frame"){
     combine_df
+  } else if (class == "ts") {
+    combine_ts
   } else if (class == "xts") {
     combine_xts
   } else {
@@ -95,13 +98,18 @@ combine_df <- function(ll){
   df[order(df[['time']]), ]
 }
 
+# transform to ts and cbind
+combine_ts <- function(ll){
+  ll.ts <- lapply(ll, as_ts)
+  do.call(cbind, ll.ts)
+}
+
+
 # transform to xts and cbind
 combine_xts <- function(ll){
-
   if (!requireNamespace('xts', quietly = TRUE)) {
     stop("The 'xts' package is not installed. To install, run:\n  install.packages(\"xts\")", call. = FALSE)
   }
-
   ll.xts <- lapply(ll, function(e) xts::as.xts(e$value, order.by = e$time))
   do.call(cbind, ll.xts)
 }
