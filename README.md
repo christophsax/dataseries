@@ -14,5 +14,6 @@ To install:
 Usage:
 
     dataseries::ds(c("CCI.AIK", "CCI.ASSS"))
-    dataseries::ds(c("CCI.AIK", "CCI.ASSS"), class = "xts")
+    dataseries::ds(c("CCI.AIK", "CCI.ASSS"), "ts")
+    dataseries::ds(c("CCI.AIK", "CCI.ASSS"), "xts")
 
