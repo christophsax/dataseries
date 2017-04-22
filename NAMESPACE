@@ -3,4 +3,5 @@
 export(cache_ls)
 export(cache_rm)
 export(ds)
+export(inventory)
 importFrom(utils,read.csv)

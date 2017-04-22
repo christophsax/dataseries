@@ -1,8 +1,8 @@
 Package: dataseries
 Type: Package
 Title: Switzerland's Data Series in One Place
-Version: 0.1.1
-Date: 2017-04-15
+Version: 0.1.2
+Date: 2017-04-22
 Author: Christoph Sax
 Maintainer: Christoph Sax <christoph.sax@gmail.com>
 Description: Download and import time series from <http://www.dataseries.org>, a comprehensive and up-to-date collection of open data from Switzerland.
