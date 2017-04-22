@@ -1,7 +1,11 @@
-0.1.1  2017-04-15
+0.1.2  2017-04-22
 --------------------------------------------------------------------------------
 
-supports 'class = "ts"'
+New Features
+
+- supports 'class = "ts"'
+- new function inventory(), returns a data.frame with all series on 
+  www.dataseries.org
 
 
 0.1.0  2017-02-17

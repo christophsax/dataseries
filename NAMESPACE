@@ -3,4 +3,8 @@
 export(cache_ls)
 export(cache_rm)
 export(ds)
+export(inventory)
+importFrom(stats,ts)
+importFrom(stats,tsp)
+importFrom(utils,download.file)
 importFrom(utils,read.csv)

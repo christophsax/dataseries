@@ -17,3 +17,4 @@ Usage:
     dataseries::ds(c("CCI.AIK", "CCI.ASSS"), "ts")
     dataseries::ds(c("CCI.AIK", "CCI.ASSS"), "xts")
 
+    dataseries::inventory()  # inventory of all available series
