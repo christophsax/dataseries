@@ -16,7 +16,7 @@
 #' }
 #' 
 #' @export
-#' @importFrom utils read.csv
+#' @importFrom utils download.file
 inventory <- function(){
   is.cached <- isTRUE("inventory" %in% names(env.cache))
   if (!is.cached){

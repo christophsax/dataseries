@@ -1,5 +1,6 @@
 # convert data.frame to ts object
 
+#' @importFrom stats ts tsp
 as_ts <- function(x) {
   tsp <- Date_POSIXct_to_tsp(x[['time']])
   cdta <- x[['value']]
@@ -8,20 +9,31 @@ as_ts <- function(x) {
 }
 
 
-# # utility function to find POSIXct range (for coding only)
-# find_range <- function(x){
-#   ser <- ts(rep(1, 1000), f = x, start = 1800)
-#   range(diff(as.numeric(as.POSIXct(ts_to_Date_POSIXct(ser)))))
-# }
 
-# find_range(12)
+seconds_since_70 <- function(year){
+  sq <- seq(as.POSIXct("1990-01-01", tz = ""), 
+            to = as.POSIXct("2010-01-01", tz = ""), 
+            by = "1 year")
+  as.numeric(seq(as.POSIXct(paste0(year, "-01-01")), length.out = 2, by = "1 year"))
+}
+
 
 in_range <- function(x, min, max, tol = 1000){
   (all(x < (max + tol)) & all(x > (min - tol)))
 }
 
+POSIXct_to_dectime <- function(x){
+  stopifnot(length(x) == 1)
+  year <- as.POSIXlt(x)$year + 1900L
+  ss70 <- seconds_since_70(year)
+
+  intra <- (as.numeric(x) - ss70[1]) / diff(ss70)
+  year + intra
+}
+
+
 POSIXct_to_tsp <- function(x){
-  check_regularity(x)
+  # check_regularity(x)
 
   stopifnot(inherits(x, "POSIXct"))
   start <- POSIXct_to_dectime(x[1])
