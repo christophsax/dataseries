@@ -1,7 +1,7 @@
 # Environment to cache downloaded series
 env.cache <- new.env(parent = emptyenv())
 
-base.url <- "http://www.dataseries.org.s3-website-eu-west-1.amazonaws.com/"
+base.url <- "https://s3.eu-central-2.amazonaws.com/dataseries-www/"
 
 #' Download Time Series from [www.dataseries.org](http://www.dataseries.org)
 #' 
@@ -44,8 +44,8 @@ ds <- function(id, class = c("data.frame", "ts", "xts")){
 
   is.cached <- id %in% names(env.cache)
   if (!all(is.cached)){
-    fname.not.cached <- paste0(base.url, id[!is.cached], ".csv")
-    z[!is.cached] <- lapply(fname.not.cached, function(e) try(read.csv(e, row.names = NULL, colClasses = c("Date", "numeric")))) 
+    fname.not.cached <- paste0(base.url, id[!is.cached], ".rds")
+    z[!is.cached] <- lapply(fname.not.cached, function(e) try(readRDS(url(e)))) 
   }
   z[is.cached] <- as.list(env.cache)[id[is.cached]]
 
